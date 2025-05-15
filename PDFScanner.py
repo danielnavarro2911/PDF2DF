@@ -6,6 +6,8 @@ import easyocr
 import openai
 import json
 import pandas as pd
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 
 POPPLER_PATH = r"/usr/bin/"
 
@@ -35,6 +37,16 @@ class PDFScanner:
             imagenes_cv.append(imagen_cv)
         
         return imagenes_cv
+    def mostrar_pagina(self,numero_de_pagina=1,figsize = (10,10)):
+
+        plt.figure(figsize)  
+
+        plt.imshow(self.imagenes[numero_de_pagina], cmap=cm.gray)
+
+
+        plt.axis('off')
+
+        plt.show()
 
     def aplicar_threshold(self):
         """Aplica threshold binario con Otsu a todas las imágenes."""
