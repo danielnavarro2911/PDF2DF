@@ -39,7 +39,7 @@ class PDFScanner:
         return imagenes_cv
     def mostrar_pagina(self,numero_de_pagina=1,figsize = (10,10)):
 
-        plt.figure(figsize)  
+        plt.figure(figsize =figsize)  
 
         plt.imshow(self.imagenes[numero_de_pagina], cmap=cm.gray)
 
