@@ -20,8 +20,10 @@ class PDFScanner:
         """
         self.pdf_path = pdf_path
         self.dpi = dpi
-        self.reader = easyocr.Reader(['es'])  # Soporte para español e inglés
+        
         self.imagenes = self.__convertir_pdf_a_imagenes()
+
+        return self.imagenes
 
     def __convertir_pdf_a_imagenes(self):
         """Convierte las páginas del PDF en imágenes y las almacena en una lista."""
@@ -68,6 +70,7 @@ class PDFScanner:
 
     def extraer_texto(self):
         """Extrae el texto de todas las imágenes usando EasyOCR."""
+        self.reader = easyocr.Reader(['es'])  # Soporte para español e inglés
         texto_total = ""
         for img in self.imagenes:
             resultados = self.reader.readtext(img, detail=0)  # detail=0 solo devuelve el texto
