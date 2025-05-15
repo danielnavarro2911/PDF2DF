@@ -23,7 +23,7 @@ class PDFScanner:
         
         self.imagenes = self.__convertir_pdf_a_imagenes()
 
-        return self.imagenes
+
 
     def __convertir_pdf_a_imagenes(self):
         """Convierte las páginas del PDF en imágenes y las almacena en una lista."""
