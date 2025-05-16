@@ -3,11 +3,11 @@ import numpy as np
 from pdf2image import convert_from_path
 from google.colab import userdata
 import easyocr
-import openai
 import json
 import pandas as pd
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+#import openai
 
 POPPLER_PATH = r"/usr/bin/"
 
@@ -76,6 +76,7 @@ class PDFScanner:
             resultados = self.reader.readtext(img, detail=0)  # detail=0 solo devuelve el texto
             texto_total += "\n".join(resultados) + "\n"
         return texto_total
+    '''
     def extraer_datos_con_ai(self,prompt,funcion,dataframe=True):
         openai.api_key = userdata.get('api_key')
         """
@@ -95,4 +96,5 @@ class PDFScanner:
           return pd.DataFrame([response])
         else:
           return response
+    '''
        
