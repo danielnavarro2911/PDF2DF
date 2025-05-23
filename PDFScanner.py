@@ -44,6 +44,8 @@ class PDFScanner:
         self.reader = PyPDF2.PdfReader(self.pdf_path)
         self.pdf = {n: page.extract_text() for n, page in enumerate(self.reader.pages, 1)}
 
+        return self.pdf
+
 
     def mostrar_pagina(self,numero_de_pagina=1,figsize = (10,10)):
 
