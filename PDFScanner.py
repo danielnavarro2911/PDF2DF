@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+import PyPDF2
 #import openai
 
 POPPLER_PATH = r"/usr/bin/"
@@ -21,24 +22,29 @@ class PDFScanner:
         self.pdf_path = pdf_path
         self.dpi = dpi
         
-        self.imagenes = self.__convertir_pdf_a_imagenes()
+        
 
 
 
-    def __convertir_pdf_a_imagenes(self):
+    def convertir_pdf_a_imagenes(self):
         """Convierte las páginas del PDF en imágenes y las almacena en una lista."""
         imagenes_pil = convert_from_path(
             self.pdf_path, dpi=self.dpi, poppler_path=POPPLER_PATH
         )
         
-        imagenes_cv = []
-        for imagen_pil in imagenes_pil:
+        imagenes_cv = {}
+        for imagen_pil ,page in enumerate(imagenes_pil,1):
             imagen_cv = np.array(imagen_pil)
             if len(imagen_cv.shape) == 3:
                 imagen_cv = cv2.cvtColor(imagen_cv, cv2.COLOR_RGB2GRAY)  # Convertir a escala de grises
-            imagenes_cv.append(imagen_cv)
+            imagenes_cv[page] = imagen_cv
         
         return imagenes_cv
+    def convertir_pdf_a_texto(self):
+        self.reader = PyPDF2.PdfReader(self.pdf_path)
+        self.pdf = {n: page.extract_text() for n, page in enumerate(self.reader.pages, 1)}
+
+
     def mostrar_pagina(self,numero_de_pagina=1,figsize = (10,10)):
 
         plt.figure(figsize =figsize)  
