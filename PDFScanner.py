@@ -28,7 +28,7 @@ class PDFScanner:
 
     def convertir_pdf_a_imagenes(self,pagina_inicio=None,pagina_final=None):
         """Convierte las páginas del PDF en imágenes y las almacena en una lista."""
-        if pafina_inicio or pagina_final:
+        if pagina_inicio or pagina_final:
             imagenes_pil = convert_from_path(
                 self.pdf_path, dpi=self.dpi,first_page=pagina_inicio,last_page=pagina_final ,poppler_path=POPPLER_PATH
             )
