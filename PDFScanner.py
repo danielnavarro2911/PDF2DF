@@ -22,21 +22,21 @@ class PDFScanner:
         self.pdf_path = pdf_path
         self.dpi = dpi
         
-        
+    def convertir_pdf_a_imagen(self,pagina):
 
+        imagenes = convert_from_path(self.pdf_path, first_page=pagina, last_page=pagina)
+
+        return imagenes
 
 
     def convertir_pdf_a_imagenes(self,pagina_inicio=None,pagina_final=None):
         """Convierte las páginas del PDF en imágenes y las almacena en una lista."""
-        if pagina_inicio or pagina_final:
-            imagenes_pil = convert_from_path(
-                self.pdf_path, dpi=self.dpi,first_page=pagina_inicio,last_page=pagina_final ,poppler_path=POPPLER_PATH
-            )
-        else:
-            imagenes_pil = convert_from_path(
-                self.pdf_path, dpi=self.dpi, poppler_path=POPPLER_PATH
-            )
         
+
+        imagenes_pil = convert_from_path(
+            self.pdf_path, dpi=self.dpi, poppler_path=POPPLER_PATH
+        )
+    
         imagenes_cv = {}
         for imagen_pil ,page in enumerate(imagenes_pil,1):
             imagen_cv = np.array(imagen_pil)
